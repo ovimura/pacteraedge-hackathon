@@ -10,13 +10,13 @@ public class News {
     private String title;
     private String timeAndDate;
     private String source;
-    private String description;
+    private String link;
 
-    public News(String title, String timeAndDate, String source, String description) {
+    public News(String title, String timeAndDate, String source, String link) {
         this.title = title;
         this.timeAndDate = timeAndDate;
         this.source = source;
-        this.description = description;
+        this.link = link;
     }
     public String getTitle() {
         return this.title;
@@ -37,14 +37,14 @@ public class News {
         this.source = source;
     }
     public String getDescription() {
-        return this.description;
+        return this.link;
     }
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String link) {
+        this.link = link;
     }
 
     @Override
     public String toString() {
-        return "News [title=" + this.title + ", timeAndDate=" + this.timeAndDate + ", source=" + this.source + ", description=" + this.description +"]";
+        return "News [title=" + this.title + ", timeAndDate=" + this.timeAndDate + ", source=" + this.source + ", link=" + this.link +"]";
     }
 }
