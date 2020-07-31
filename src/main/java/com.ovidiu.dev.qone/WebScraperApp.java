@@ -69,7 +69,7 @@ public class WebScraperApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS news(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(100), timeAndDate VARCHAR(100), source VARCHAR(100), link VARCHAR(100))");
+        jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS news(id INTEGER PRIMARY KEY AUTO_INCREMENT, title VARCHAR(1000), timeAndDate VARCHAR(300), source VARCHAR(300), link VARCHAR(1000))");
 
         for(int i=0; i<yahoonews.size(); i++) {
             jdbcTemplate.execute("INSERT INTO news (title, timeAndDate, source, link) VALUES (\""+yahoonews.get(i)[0]
