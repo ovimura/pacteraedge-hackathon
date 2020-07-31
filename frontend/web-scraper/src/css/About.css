@@ -1,0 +1,11 @@
+.aAbout {
+    text-decoration: none;
+    transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    cursor: pointer;
+    color: blue;
+  }
+.aAbout:hover, .aAbout:active, .aAbout:focus{
+    text-decoration: none;
+    color: red;
+    transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  }

@@ -1,8 +1,3 @@
-.idea
-target/
-web-scraper.iml
-
-
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -26,5 +21,3 @@ web-scraper.iml
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-node_modules/
