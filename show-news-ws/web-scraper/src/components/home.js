@@ -3,18 +3,32 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 class home extends Component {
-    state = { newsheadlines: [] }
+    state = { newsheadlines: [], time_date: "" }
 
     componentDidMount() {
         axios.get("http://localhost:3030").then(resp => {
-
-
+        var currentDate = new Date();
+        console.log(currentDate.getTime());
+        console.log(currentDate.getDate());
+        console.log(currentDate.getFullYear());
+        console.log(currentDate.getMonth());
+        console.log(currentDate.getHours());
+        console.log(currentDate.getMinutes());
+        console.log(currentDate.getDay());
+        let time_date = currentDate.getMonth() + "/" + currentDate.getDate() + "/" + currentDate.getFullYear() + " @"+ currentDate.getHours() + ":" + currentDate.getMinutes();
+        let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        console.log(time_date);
         var data = resp.data;
         var arr = [];
         for(var i=0; i<data.length; i++) {
-            arr.push([data[i]['id'],data[i]['title'],data[i]['link'],data[i]['source'], data[i]['timeAndDate']]);
+            if(data[i]['timeAndDate'].toLowerCase().includes(days[currentDate.getDay()].toLowerCase()) && 
+               data[i]['timeAndDate'].toLowerCase().includes(months[currentDate.getMonth()].toLowerCase()) &&
+               data[i]['timeAndDate'].toLowerCase().includes("2020")) {
+                arr.push([data[i]['id'],data[i]['title'],data[i]['link'],data[i]['source'], data[i]['timeAndDate']]);
+            }
         }
-        this.setState({newsheadlines: arr});
+        this.setState({newsheadlines: arr, time_date});
         console.log(arr);
         console.log(resp.data);
 
@@ -33,10 +47,15 @@ class home extends Component {
       }
 
     render() { 
+        let {time_date} = this.state;
         return (
             <div  className="canv container-fluid">
             <div role="main">
-            <h1>News</h1>
+            
+            <h1>News of The Day </h1>
+            <h2>
+                <span style={{color:"purple", fontSize: "22px", paddingLeft:"4px"}}>{time_date}</span>
+            </h2>
             <table className="lft">
                 <tbody>
                 <tr>
