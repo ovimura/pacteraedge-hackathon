@@ -5,7 +5,7 @@ import axios from 'axios';
 class Keywords extends Component {
     state = { 
         newsheadlines: [], 
-        Keywords: [],
+        hl_kws: [],
         time_date: "" 
     }
     componentDidMount() {
@@ -50,7 +50,24 @@ class Keywords extends Component {
             console.log(arr[j][1].toLowerCase());
         }
         console.log(headlines_kws);
-        this.setState({newsheadlines: arr, time_date});
+
+        arr = [];
+        for(var f=0; f<data.length; f++) {
+            if(!(data[f]['timeAndDate'].toLowerCase().includes(days[currentDate.getDay()].toLowerCase()) && 
+                 data[f]['timeAndDate'].toLowerCase().includes(months[currentDate.getMonth()].toLowerCase()) &&
+                 data[f]['timeAndDate'].toLowerCase().includes("2020"))) {
+                var doIIncludeTheHeadline = false;
+                for(var h=0; h<headlines_kws.length; h++){
+                    if(data[f]['title'].toLowerCase().includes(headlines_kws[h].toLowerCase()))
+                        doIIncludeTheHeadline = true;
+                }
+                if(doIIncludeTheHeadline) {
+                    arr.push([data[f]['id'],data[f]['title'],data[f]['link'],data[f]['source'], data[f]['timeAndDate']]);
+                }
+            }
+        }
+
+        this.setState({newsheadlines: arr, hl_kws: headlines_kws, time_date});
         console.log(arr);
         console.log(resp.data);
 
@@ -70,11 +87,16 @@ class Keywords extends Component {
 
     render() { 
         let {time_date} = this.state;
+        let {hl_kws} = this.state;
+        let {newsheadlines} = this.state;
+        let n_newsheadlines = newsheadlines.length;
+        let n_hl_kws = hl_kws.length;
         return (
             <div  className="canv container-fluid">
             <div role="main">
             
-            <h1>Keywords of The Day </h1>
+        <h1>Keywords of The Day</h1>
+        <span>{n_newsheadlines} articles found, {n_hl_kws} keywords of the day found</span>
             <h2>
                 <span style={{color:"purple", fontSize: "22px", paddingLeft:"4px"}}>{time_date}</span>
             </h2>
