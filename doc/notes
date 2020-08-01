@@ -1,0 +1,21 @@
+Hi Ovidiu,
+
+I am with the AI Engineering team at PacteraEdge. I have attached the instructions/questions for your Hackathon .You should receive three files (2 pdfs and 2 csv files).
+
+Hackathon is part of our hiring process; candidates are given take-home assignments that are to be completed within a stipulated time. This is typically followed by a discussion of your solution and follow up questions.
+
+Please turn in your solution(code files, test cases, test results, sql queries and results) by 6 p.m PST tomorrow.
+
+For question 1) Create a small web application that gets latest news feeds from the given news sites(feel free to use other sources/APIs if you would like to) and display these articles on the browser in the manner given in the instructions. You should use powershell scripting to automatically schedule the daily job to scrape news articles, use java/python for your server side programming, and any open-source lightweight database for running queries.
+
+questions 2) Use the data files provided (sales_data.csv, stores_data.csv) to answer the SQL questions.
+
+question 3) Python Programming use Pycharm or any IDE of your choice
+
+Please revert for any questions/concerns.
+
+All the best!!
+
+Best regards,
+Vinitha Palani
+
