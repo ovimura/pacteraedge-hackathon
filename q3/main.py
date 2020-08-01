@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 class Employee(object):
@@ -30,12 +31,21 @@ class Employee(object):
 
 def main():
     es = []
+    import random
+    r = random.randint(1,9)
+
     for i in range(25):
-        es.append(Employee("John", "Smith", "Male", "Software Engineer", "Single", 2, 30000, 1000))
-
-    df = pd.DataFrame(es)
-
+        es.append(Employee("John", "Smith", "Male", "Software Engineer", "Single", 2, 30000*r, 1000))
+        r = random.randint(1, 9)
+    data = {
+        'title': [x.title for x in es],
+        'salary': [x.salary for x in es]
+    }
+    df = pd.DataFrame(data, columns=['title', 'salary'])
+    print([x.title for x in es])
     print(df.count())
+    df.plot(x='title', y='salary', kind='line')
+    plt.show()
 
 
 if __name__ == "__main__":
