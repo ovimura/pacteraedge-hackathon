@@ -31,7 +31,8 @@ class Keywords extends Component {
                 arr.push([data[i]['id'],data[i]['title'],data[i]['link'],data[i]['source'], data[i]['timeAndDate']]);
             }
         }
-        let exclude_kws = ['a', 'an', 'is', 'the', 'this', 'that']
+        let exclude_kws = ['a', 'an', 'is', 'the', 'this', 'that', 'sc', 'no', 'yes', '-', 'post', 'for', 'while', 'of',
+    'but', 'are', 'to', 'us', 'with', 'as', 'in', 'out', 'and', 'who', 'be', 'set', 'over', '9', '14', 'it', 'its', 'at', 'she']
         let headlines_kws = []
         for(var j=0; j<arr.length; j++) {
             var line = arr[j][1].toLowerCase();
@@ -95,7 +96,7 @@ class Keywords extends Component {
             <div  className="canv container-fluid">
             <div role="main">
             
-        <h1>Keywords of The Day</h1>
+        <h1>Keywords for the day</h1>
         <span>{n_newsheadlines} articles found, {n_hl_kws} keywords of the day found</span>
             <h2>
                 <span style={{color:"purple", fontSize: "22px", paddingLeft:"4px"}}>{time_date}</span>
