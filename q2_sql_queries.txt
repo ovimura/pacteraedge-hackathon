@@ -1,0 +1,35 @@
+
+
+Query 2:
+
+For each type of the stores, find 5 stores with highest average weekly sales.
+
+
+Solution:
+
+
+select tp, avg_w from
+(select st.Type tp,st.Store sto, avg(sa.Weekly_Sales) avg_w from stores_data st join sales_data sa on (st.Store = sa.Store)
+group by st.Type, st.Store
+having avg_w > (select Weekly_Sales from stores_data))
+group by avg_w order by 2 limit 5
+
+
+Query 3:
+
+Find stores with increased total sales in December from 2010 to 2011.
+
+SELECT st.Store a, sum(sd.Weekly_Sales) b
+from stores_data st join sales_data sd on st.Store = sd.Store
+where SUBSTR(sd.date, 7, 4) IS '2010' and SUBSTR(sd.date, 4, 2) IS '12' 
+group by a;
+
+and b > 1000;
+(
+SELECT sum(sd1.Weekly_Sales) from stores_data st1 join sales_data sd1 on st1.Store = sd1.Store
+where SUBSTR(sd1.date, 7, 4) = '2011' and SUBSTR(sd1.date, 4, 2) = '12'
+and a = st1.Store
+);
+
+
+
