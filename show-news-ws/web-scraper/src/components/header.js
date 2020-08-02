@@ -7,6 +7,9 @@ class Header extends Component {
     render() {
         return (
             <header>
+                <div className="logo">
+                    <a href="https://github.com/ovimura/pacteraedge-hackathon" style={{fontSize: "30px", fontWeight: "900", color: "fuchsia"}}>Ovidiu Mura</a>
+                </div>
                 <nav>
                     <ul>
                         <li className="firstmenu">

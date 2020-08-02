@@ -8,17 +8,9 @@ class home extends Component {
     componentDidMount() {
         axios.get("http://localhost:3030").then(resp => {
         var currentDate = new Date();
-        console.log(currentDate.getTime());
-        console.log(currentDate.getDate());
-        console.log(currentDate.getFullYear());
-        console.log(currentDate.getMonth());
-        console.log(currentDate.getHours());
-        console.log(currentDate.getMinutes());
-        console.log(currentDate.getDay());
         let time_date = currentDate.getMonth() + "/" + currentDate.getDate() + "/" + currentDate.getFullYear() + " @"+ currentDate.getHours() + ":" + currentDate.getMinutes();
         let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        console.log(time_date);
         var data = resp.data;
         var arr = [];
         for(var i=0; i<data.length; i++) {
@@ -29,9 +21,6 @@ class home extends Component {
             }
         }
         this.setState({newsheadlines: arr, time_date});
-        console.log(arr);
-        console.log(resp.data);
-
         }).catch((error)=>{
               console.log(error)
             });
@@ -54,7 +43,7 @@ class home extends Component {
             
             <h1>News of The Day </h1>
             <h2>
-                <span style={{color:"purple", fontSize: "22px", paddingLeft:"4px"}}>{time_date}</span>
+                <span style={{color:"purple", fontSize: "22px", paddingLeft:"4px"}}>Today is {time_date}</span>
             </h2>
             <table className="lft">
                 <tbody>
