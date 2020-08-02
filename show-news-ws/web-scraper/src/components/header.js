@@ -8,7 +8,7 @@ class Header extends Component {
         return (
             <header>
                 <div className="logo">
-                    <a href="https://github.com/ovimura/pacteraedge-hackathon" style={{fontSize: "30px", fontWeight: "900", color: "fuchsia"}}>Ovidiu Mura</a>
+                    <a href="https://github.com/ovimura/pacteraedge-hackathon" style={{fontSize: "30px", fontWeight: "900", color: "fuchsia"}}>Ovidiu Mura: pacteraedge-hackathon</a>
                 </div>
                 <nav>
                     <ul>
