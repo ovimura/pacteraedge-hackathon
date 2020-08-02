@@ -53,7 +53,7 @@ public class WebScraperApp implements CommandLineRunner {
         Elements newsHeadlinesg = docgoogle.select("rss channel item");
         String[] newsg = new String[4];
         for (Element hl : newsHeadlinesg) {
-            newsg[0] = hl.select("title").text();
+            newsg[0] = hl.select("title").text().replace("\"", "");
             newsg[1] = hl.select("pubDate").text();
             newsg[2] = hl.select("source").attr("url"); //.text();
             newsg[3] = hl.select("link").text();

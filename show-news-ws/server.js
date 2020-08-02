@@ -23,8 +23,8 @@ app.get("/",(req,res) => {
         res.send(JSON.parse(JSON.stringify(rows)));
     });
 });
-
-app.listen(3030, () => {
+const port = process.env.port || 3000;
+app.listen(port, () => {
     console.log('Server is running at port 3030');
 });
 

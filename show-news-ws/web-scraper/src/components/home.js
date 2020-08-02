@@ -6,7 +6,7 @@ class home extends Component {
     state = { newsheadlines: [], time_date: "" }
 
     componentDidMount() {
-        axios.get("http://localhost:3030").then(resp => {
+        axios.get("http://ec2-34-218-133-181.us-west-2.compute.amazonaws.com").then(resp => {
         var currentDate = new Date();
         let time_date = currentDate.getMonth() + "/" + currentDate.getDate() + "/" + currentDate.getFullYear() + " @"+ currentDate.getHours() + ":" + currentDate.getMinutes();
         let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
