@@ -23,11 +23,12 @@ class Scramble extends Component {
             }
             return a.join("");
         }
-        s = "the quick brown fox jumps over the lazy dog"
-        console.log(s.shuffle());
+        var result = s.shuffle();
+        console.log(result);
         //-> "veolrm  hth  ke opynug tusbxq ocrad ofeizwj"
         
         console.log("the quick brown fox jumps over the lazy dog".shuffle());
+        return result;
     }
 
 
@@ -55,45 +56,46 @@ class Scramble extends Component {
                 arr.push([data[i]['id'],data[i]['title'],data[i]['link'],data[i]['source'], data[i]['timeAndDate']]);
             }
         }
-        let exclude_kws = ['a', 'an', 'is', 'the', 'this', 'that', 'sc', 'no', 'yes', '-', 'post', 'for', 'while', 'of',
-    'but', 'are', 'to', 'us', 'with', 'as', 'in', 'out', 'and', 'who', 'be', 'set', 'over', '9', '14', 'it', 'its', 'at', 'she']
-        let headlines_kws = []
-        for(var j=0; j<arr.length; j++) {
-            var line = arr[j][1].toLowerCase();
-            var tokens = line.split(" ");
-            for (var t=0; t<tokens.length; t++) {
-                var isForExclusion = false
-                for(var k=0; k<exclude_kws.length; k++){
-                    if(tokens[t].toLowerCase() === exclude_kws[k].toLowerCase()) {
-                        isForExclusion = true;
-                    }
-                }
-                if(!isForExclusion) {
-                    headlines_kws.push(tokens[t]);
-                }
-            }
-            console.log(arr[j][1].toLowerCase());
-        }
-        console.log(headlines_kws);
+    //     let exclude_kws = ['a', 'an', 'is', 'the', 'this', 'that', 'sc', 'no', 'yes', '-', 'post', 'for', 'while', 'of',
+    // 'but', 'are', 'to', 'us', 'with', 'as', 'in', 'out', 'and', 'who', 'be', 'set', 'over', '9', '14', 'it', 'its', 'at', 'she']
+    //     let headlines_kws = []
+    //     for(var j=0; j<arr.length; j++) {
+    //         var line = arr[j][1].toLowerCase();
+    //         var tokens = line.split(" ");
+    //         for (var t=0; t<tokens.length; t++) {
+    //             var isForExclusion = false
+    //             for(var k=0; k<exclude_kws.length; k++){
+    //                 if(tokens[t].toLowerCase() === exclude_kws[k].toLowerCase()) {
+    //                     isForExclusion = true;
+    //                 }
+    //             }
+    //             if(!isForExclusion) {
+    //                 headlines_kws.push(tokens[t]);
+    //             }
+    //         }
+    //         console.log(arr[j][1].toLowerCase());
+    //     }
+    //     console.log(headlines_kws);
 
-        arr = [];
-        for(var f=0; f<data.length; f++) {
-            if(!(data[f]['timeAndDate'].toLowerCase().includes(days[currentDate.getDay()].toLowerCase()) && 
-                 data[f]['timeAndDate'].toLowerCase().includes(months[currentDate.getMonth()].toLowerCase()) &&
-                 data[f]['timeAndDate'].toLowerCase().includes("2020"))) {
-                var doIIncludeTheHeadline = false;
-                for(var h=0; h<headlines_kws.length; h++){
-                    if(data[f]['title'].toLowerCase().includes(headlines_kws[h].toLowerCase()))
-                        doIIncludeTheHeadline = true;
-                }
-                if(doIIncludeTheHeadline) {
-                    arr.push([data[f]['id'],data[f]['title'],data[f]['link'],data[f]['source'], data[f]['timeAndDate']]);
-                }
-            }
-        }
+    //     arr = [];
+    //     for(var f=0; f<data.length; f++) {
+    //         if(!(data[f]['timeAndDate'].toLowerCase().includes(days[currentDate.getDay()].toLowerCase()) && 
+    //              data[f]['timeAndDate'].toLowerCase().includes(months[currentDate.getMonth()].toLowerCase()) &&
+    //              data[f]['timeAndDate'].toLowerCase().includes("2020"))) {
+    //             var doIIncludeTheHeadline = false;
+    //             for(var h=0; h<headlines_kws.length; h++){
+    //                 if(data[f]['title'].toLowerCase().includes(headlines_kws[h].toLowerCase()))
+    //                     doIIncludeTheHeadline = true;
+    //             }
+    //             if(doIIncludeTheHeadline) {
+    //                 arr.push([data[f]['id'],data[f]['title'],data[f]['link'],data[f]['source'], data[f]['timeAndDate']]);
+    //             }
+    //         }
+    //     }
 
-        this.setState({newsheadlines: arr, hl_kws: headlines_kws, time_date});
-        this.shuffle();
+    //    this.setState({newsheadlines: arr, hl_kws: headlines_kws, time_date});
+        this.setState({newsheadlines: arr, hl_kws: [], time_date});
+        this.shuffle("pepsi");
         console.log(arr);
         console.log(resp.data);
 
@@ -111,18 +113,50 @@ class Scramble extends Component {
         })
       }
 
+    selectFirstWord(hl) {
+        var w = "";
+        for(var i=0; i<hl.length; i++) {
+            var ln = hl[i][1].toLowerCase().split(" ");
+            for(var j=0; j<ln.length; j++) {
+                w = ln[j];
+                if(w.length > 5) {
+                    return w;
+                }
+            }
+        }
+        if (w === "") {
+            return "firstwordnotfound";
+        }
+    }
+
+    selectSecondWord(hl) {
+        var w = "";
+        for(var i=hl.length-1; i>0; i--) {
+            var ln = hl[i][1].toLowerCase().split(" ");
+            for(var j=0; j<ln.length; j++) {
+                w = ln[j];
+                if(w.length > 5) {
+                    return w;
+                }
+            }
+        }
+        if (w === "") {
+            return "secondwordnotfound";
+        }
+    }
+
     render() { 
         let {time_date} = this.state;
-        let {hl_kws} = this.state;
         let {newsheadlines} = this.state;
         let n_newsheadlines = newsheadlines.length;
-        let n_hl_kws = hl_kws.length;
+        let first_word = this.selectFirstWord(newsheadlines)
+        let second_word = this.selectSecondWord(newsheadlines)
         return (
             <div  className="canv container-fluid">
             <div role="main">
             
         <h1>Scrable for the day</h1>
-        <span>{n_newsheadlines} articles found, {n_hl_kws} keywords of the day found</span>
+        <span>{n_newsheadlines} articles found</span>
             <h2>
                 <span style={{color:"purple", fontSize: "22px", paddingLeft:"4px"}}>{time_date}</span>
             </h2>
@@ -133,7 +167,11 @@ class Scramble extends Component {
                         <article className="scroll tbl" tabIndex="0">
                             <table>
                                 <tbody>
-                                    {this.renderNews()}
+                                    {/* {this.renderNews()} */}
+                                    <tr><td>First Selected Word: {first_word}</td></tr>
+                                    <tr><td>Scrabled First Word: {this.shuffle(first_word)}</td></tr>
+                                    <tr><td>First Selected Word: {second_word}</td></tr>
+                                    <tr><td>Scrabled First Word: {this.shuffle(second_word)}</td></tr>
                                 </tbody>
                             </table>
                         </article>
