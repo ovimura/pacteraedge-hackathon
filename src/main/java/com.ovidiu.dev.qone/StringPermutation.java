@@ -59,13 +59,64 @@ public class StringPermutation {
         }
         return map;
     }
+    static Set<String> strings = new HashSet<>();
+
+
+    static String swap(String str, int i, int j) {
+        char c1 = str.toCharArray()[i];
+        char c2 = str.toCharArray()[j];
+        char[] temp = str.toCharArray();
+        temp[i] = c2;
+        temp[j] = c1;
+        return new String(temp);
+    }
+
+    public static Set<String> per(String str, int i, int n) {
+        if(i == n-1) {
+            System.out.println(str);
+            strings.add(str);
+            return strings;
+        }
+        for (int j = i; j<n; j++) {
+            String s = swap(str, i, j);
+            per(s, i+1, n);
+        }
+        return strings;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static void main(String []args) {
-        Set<String> s = permu("abc");
+        Set<String> s = per("abcd", 0, 4);
         System.out.println("No of Permutations: " + s.size());
-        for(String str: s) {
-            System.out.println(">" + str);
-        }
+//        for(String str: s) {
+//            System.out.println(">" + str);
+//        }
         System.out.println(getCount("abcc"));
     }
 }
