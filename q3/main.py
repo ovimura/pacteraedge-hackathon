@@ -44,7 +44,7 @@ def main():
     df = pd.DataFrame(data, columns=['title', 'salary'])
     print([x.title for x in es])
     print(df.count())
-    df.plot(x='title', y='salary', kind='line')
+    df.plot(x='title', y='salary', kind='bar')
     plt.show()
 
 
